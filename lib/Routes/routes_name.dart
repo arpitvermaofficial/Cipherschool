@@ -6,4 +6,5 @@ class RouteName {
   static const String expansePage= "ExpansePage";
   static const String profilePage = "ProfilePage";
   static const String homePage = "HomePage";
+  static const String SignInScreen = "SignInScreen";
 }
