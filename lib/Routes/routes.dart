@@ -1,9 +1,9 @@
 import 'package:cipherschool/Routes/routes_name.dart';
-import 'package:cipherschool/expansePage.dart';
-import 'package:cipherschool/incomePage.dart';
-import 'package:cipherschool/profilePage.dart';
-import 'package:cipherschool/signUp.dart';
-import 'package:cipherschool/splashScreen.dart';
+import 'package:cipherschool/View/expansePage.dart';
+import 'package:cipherschool/View/incomePage.dart';
+import 'package:cipherschool/View/profilePage.dart';
+import 'package:cipherschool/View/signUp.dart';
+import 'package:cipherschool/View/splashScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

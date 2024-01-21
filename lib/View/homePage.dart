@@ -1,9 +1,11 @@
-import 'package:cipherschool/Widgets/colors.dart';
-import 'package:cipherschool/homeScreen.dart';
+import 'package:cipherschool/Utils/colors.dart';
+import 'package:cipherschool/View/homeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import '../transactionList.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -27,7 +29,7 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> bottomBarPages = [
      HomeScreen(),
-    HomeScreen(),
+    NoteList(),
     HomeScreen(),
      HomeScreen(),
    HomeScreen(),

@@ -1,9 +1,9 @@
-import 'package:cipherschool/Widgets/colors.dart';
+import 'package:cipherschool/Utils/colors.dart';
 import 'package:cipherschool/Widgets/textField.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
 
-import 'Widgets/googleSignButton.dart';
+import '../Widgets/googleSignButton.dart';
 import 'authentication.dart';
 
 class SignUp extends StatefulWidget {

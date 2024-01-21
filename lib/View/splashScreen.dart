@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:cipherschool/Routes/routes_name.dart';
-import 'package:cipherschool/signUp.dart';
+import 'package:cipherschool/View/signUp.dart';
 import 'package:flutter/material.dart';
 
 class Splash extends StatefulWidget {

@@ -1,4 +1,4 @@
-import 'package:cipherschool/splashScreen.dart';
+import 'package:cipherschool/View/splashScreen.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -17,10 +17,7 @@ Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.transparent, // transparent status bar
   ));
-  runApp(
-      DevicePreview(
-          enabled: !kReleaseMode,
-          builder: (context) =>MyApp()));
+  runApp(DevicePreview(enabled: !kReleaseMode, builder: (context) => MyApp()));
 }
 
 class MyApp extends StatelessWidget {
