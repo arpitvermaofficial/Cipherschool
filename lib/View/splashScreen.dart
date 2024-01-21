@@ -16,7 +16,7 @@ class _SplashState extends State<Splash> {
   void initState() {
     Future.delayed(
         const Duration(seconds: 3),
-            () => Navigator.pushNamed(context, RouteName.SignInScreen)
+            () => Navigator.pushNamed(context, RouteName.signUp)
     );
     super.initState();
   }

@@ -1,3 +1,4 @@
+import 'package:cipherschool/homePage.dart';
 import 'package:cipherschool/userinfo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -16,9 +17,7 @@ class Authentication {
     if (user != null) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => UserInfoScreen(
-            user: user,
-          ),
+          builder: (context) => HomePage()
         ),
       );
     }
