@@ -48,7 +48,7 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
 
                   if (user != null) {
                     Navigator.pushNamed(
-                        context, RouteName.transactionDashBoard);
+                        context, RouteName.HomePage);
                   }
                 },
                 child: Padding(

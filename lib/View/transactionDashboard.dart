@@ -20,7 +20,6 @@ class transactionDashBoard extends StatefulWidget {
 
 class _transactionDashBoardState extends State<transactionDashBoard> {
   Future<List<TransacationModel>>? mytranscation;
-  final todoDB = TodoDB();
   Future<bool>? isLoading;
 
   @override
@@ -29,9 +28,6 @@ class _transactionDashBoardState extends State<transactionDashBoard> {
     super.initState();
   }
 
-  void _delete(String date) async {
-    await todoDB.deleteNote(date);
-  }
 
   Future<bool> intialise() async {
     await Provider.of<TodoDB>(context, listen: false).getNoteList();
@@ -175,7 +171,7 @@ class _transactionDashBoardState extends State<transactionDashBoard> {
                         direction: DismissDirection.endToStart,
                         key: UniqueKey(),
                         onDismissed: (direction) {
-                          _delete(Provider.of<TodoDB>(context, listen: false)
+                          todo.deleteNote(Provider.of<TodoDB>(context, listen: false)
                               .transaction[index]
                               .time);
                         },

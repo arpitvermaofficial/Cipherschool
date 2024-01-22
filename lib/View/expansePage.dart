@@ -6,6 +6,7 @@ import 'package:cipherschool/View/transactionDashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 import '../Model/transactionModel.dart';
 import '../database/ViewModel/dbViewModel.dart';
@@ -28,28 +29,10 @@ class _ExpansePageState extends State<ExpansePage> {
   TextEditingController amountController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
 
-  void initState() {
-    super.initState();
-  }
   void dispose() {
     amountController.dispose();
     descriptionController.dispose();
     super.dispose();
-  }
-
-  void _save(String Category, String icon, String iconcColor) async {
-    print("category is $Category");
-    print("icon is $icon");
-    print("iconcolor is $iconcColor");
-    String Timestamp =
-        DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()).toString();
-    await todoDB.insertNote(TransacationModel(
-        amount: int.parse(amountController.text) * -1,
-        category: Category,
-        description: descriptionController.text,
-        time: Timestamp,
-        icon: icon,
-        iconcolor: iconcColor));
   }
 
   @override
@@ -121,7 +104,6 @@ class _ExpansePageState extends State<ExpansePage> {
             ),
             Expanded(
               child: Container(
-                
                 width: double.infinity,
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 decoration: BoxDecoration(
@@ -234,32 +216,39 @@ class _ExpansePageState extends State<ExpansePage> {
                     SizedBox(
                       height: 15.h,
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        test = selectedCategory.split('#');
-              
-                        _save(test[0], test[1], test[2]);
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => HomePage()));
-                      },
-                      child: Container(
-                        width: double.infinity,
-                        height: 7.h,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: ColorUtils.purplelight),
-                        child: Center(
-                            child: Text(
-                          'Continue',
-                          style: TextStyle(
-                              fontSize: 20.sp,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600),
-                        )),
-                      ),
-                    ),
+                    Consumer<TodoDB>(builder: (context, todo, child) {
+                      return GestureDetector(
+                        onTap: () {
+                          test = selectedCategory.split('#');
+                          String Timestamp = DateFormat('yyyy-MM-dd HH:mm:ss')
+                              .format(DateTime.now())
+                              .toString();
+                          todo.insertNote(TransacationModel(
+                              amount: int.parse(amountController.text) * -1,
+                              category: test[0],
+                              description: descriptionController.text,
+                              time: Timestamp,
+                              icon: test[1],
+                              iconcolor: test[2]));
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          height: 7.h,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: ColorUtils.purplelight),
+                          child: Center(
+                              child: Text(
+                            'Continue',
+                            style: TextStyle(
+                                fontSize: 20.sp,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600),
+                          )),
+                        ),
+                      );
+                    }),
                   ],
                 ),
               ),

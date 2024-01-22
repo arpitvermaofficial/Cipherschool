@@ -32,6 +32,13 @@ class TodoDB with ChangeNotifier {
   Future<void> insertNote(TransacationModel note) async {
     final database1 = await DatabaseHelper().database;
     int result = await database1!.insert(transactionTable, note.toMap());
+    transaction.add(note);
+    if (note.amount > 0) {
+      totalIncome += note.amount;
+    } else {
+      totalExpense += note.amount;
+    }
+
     notifyListeners();
   }
 
