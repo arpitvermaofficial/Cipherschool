@@ -1,10 +1,11 @@
 import 'package:cipherschool/Routes/routes_name.dart';
+import 'package:cipherschool/Utils/colors.dart';
 import 'package:cipherschool/View/homePage.dart';
-import 'package:cipherschool/View/homeScreen.dart';
+import 'package:cipherschool/View/transactionDashboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../View/authentication.dart';
+import '../ViewModel/Services/authentication.dart';
 
 class GoogleSignInButton extends StatefulWidget {
   @override
@@ -16,15 +17,15 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: 16.0),
-        child: _isSigningIn
-            ? CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-              )
-            : OutlinedButton(
+    return _isSigningIn
+        ? CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(ColorUtils.purplelight),
+          )
+        : Container(
+            width: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 16.0),
+              child: OutlinedButton(
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Colors.white),
                   shape: MaterialStateProperty.all(
@@ -46,7 +47,8 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                   });
 
                   if (user != null) {
-                    Navigator.pushNamed(context, RouteName.homePage);
+                    Navigator.pushNamed(
+                        context, RouteName.transactionDashBoard);
                   }
                 },
                 child: Padding(
@@ -74,7 +76,7 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
                   ),
                 ),
               ),
-      ),
-    );
+            ),
+          );
   }
 }

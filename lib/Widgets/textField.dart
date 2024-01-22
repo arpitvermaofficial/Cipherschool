@@ -10,10 +10,10 @@ class textField extends StatelessWidget {
     return
       TextField(
         controller: controller,
-        onTapOutside: (event) {
-          print('onTapOutside');
-          FocusManager.instance.primaryFocus?.unfocus();
-        },
+        // onTapOutside: (event) {
+        //   print('onTapOutside');
+        //   FocusManager.instance.primaryFocus?.unfocus();
+        // },
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.grey),

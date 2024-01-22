@@ -5,8 +5,11 @@ import 'package:cipherschool/View/onBoardingPage.dart';
 import 'package:cipherschool/View/profilePage.dart';
 import 'package:cipherschool/View/signUp.dart';
 import 'package:cipherschool/View/splashScreen.dart';
+import 'package:cipherschool/View/transactionDashboard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../View/homePage.dart';
 
 
 class Routes {
@@ -22,7 +25,11 @@ class Routes {
         return MaterialPageRoute(builder: (context) => ProfilePage());
       case RouteName.signUp:
         return MaterialPageRoute(builder: (context) => SignUp());
-      case RouteName.onBoarding:
+      case RouteName.transactionDashBoard:
+        return MaterialPageRoute(builder: (context) => transactionDashBoard());
+        case RouteName.HomePage:
+        return MaterialPageRoute(builder: (context) => HomePage());
+      case RouteName.onBoardingPage:
         return MaterialPageRoute(builder: (context) => onBoardingPage());
       default:
         return MaterialPageRoute(builder: (context) {

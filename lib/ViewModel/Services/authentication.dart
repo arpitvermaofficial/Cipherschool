@@ -5,6 +5,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
+import '../../Utils/sharedPrefrences.dart';
+
 class Authentication {
   static Future<FirebaseApp> initializeFirebase({
     required BuildContext context,
@@ -67,6 +69,7 @@ class Authentication {
               await auth.signInWithCredential(credential);
 
           user = userCredential.user;
+          UserCredentialPreferences.setUserUID(user!.uid??"");
         } on FirebaseAuthException catch (e) {
           if (e.code == 'account-exists-with-different-credential') {
             ScaffoldMessenger.of(context).showSnackBar(

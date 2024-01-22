@@ -4,7 +4,8 @@ class RouteName {
   static const String incomePage = "IncomePage";
   static const String expansePage= "ExpansePage";
   static const String profilePage = "ProfilePage";
-  static const String homePage = "HomePage";
+  static const String transactionDashBoard = "transactionDashBoard";
   static const String SignInScreen = "SignInScreen";
-  static const String onBoarding = "onBoarding";
+  static const String onBoardingPage = "onBoardingPage";
+  static const String HomePage= "HomePage";
 }

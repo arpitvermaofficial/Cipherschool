@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
 
 import '../Widgets/googleSignButton.dart';
-import 'authentication.dart';
+import '../ViewModel/Services/authentication.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -18,6 +18,12 @@ class _SignUpState extends State<SignUp> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool value = false;
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

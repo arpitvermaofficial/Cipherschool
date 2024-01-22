@@ -47,7 +47,7 @@ class _accountCardState extends State<accountCard> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20)),
                 child: SvgPicture.asset(
-                  'assets/images/${widget.CardIcon}.svg',
+                  'assets/icons/${widget.CardIcon}.svg',
                 ),
               ),
               Column(

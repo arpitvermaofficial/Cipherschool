@@ -2,7 +2,7 @@ import 'package:cipherschool/Utils/colors.dart';
 import 'package:cipherschool/Utils/category.dart';
 import 'package:cipherschool/Model/categoryModel.dart';
 import 'package:cipherschool/View/homePage.dart';
-import 'package:cipherschool/View/homeScreen.dart';
+import 'package:cipherschool/View/transactionDashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:flutter_svg/svg.dart';
@@ -30,6 +30,11 @@ class _IncomePageState extends State<IncomePage> {
 
   void initState() {
     super.initState();
+  }
+  void dispose() {
+    amountController.dispose();
+    descriptionController.dispose();
+    super.dispose();
   }
 
   void _save(String Category, String icon, String iconcColor) async {
@@ -70,52 +75,52 @@ class _IncomePageState extends State<IncomePage> {
             ),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                height: 30.h,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "How much?",
-                      style: TextStyle(fontSize: 17.sp, color: Colors.white54),
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          "₹ ",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 50.sp,
-                          ),
+        body: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              height: 30.h,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "How much?",
+                    style: TextStyle(fontSize: 17.sp, color: Colors.white54),
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        "₹ ",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 50.sp,
                         ),
-                        Expanded(
-                          child: TextField(
-                              controller: amountController,
-                              keyboardType: TextInputType.number,
-                              style: TextStyle(
+                      ),
+                      Expanded(
+                        child: TextField(
+                            controller: amountController,
+                            keyboardType: TextInputType.number,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 50.sp,
+                            ),
+                            decoration: InputDecoration(
+                              hintText: "0",
+                              hintStyle: TextStyle(
                                 color: Colors.white,
                                 fontSize: 50.sp,
                               ),
-                              decoration: InputDecoration(
-                                hintText: "0",
-                                hintStyle: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 50.sp,
-                                ),
-                              )),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
+                            )),
+                      ),
+                    ],
+                  )
+                ],
               ),
-              Container(
-                height: 57.7.h,
+            ),
+            Expanded(
+              child: Container(
+
                 width: double.infinity,
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 decoration: BoxDecoration(
@@ -256,9 +261,9 @@ class _IncomePageState extends State<IncomePage> {
                     ),
                   ],
                 ),
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ));
   }
 }

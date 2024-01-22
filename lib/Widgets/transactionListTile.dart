@@ -14,6 +14,8 @@ class tranSactionListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String a=transaction.amount.abs().toString();
+
     String valueString = transaction.iconcolor.split('(0x')[1].split(')')[0]; //
     int value = int.parse(valueString, radix: 16);
     Color iconColor = new Color(value);
@@ -33,7 +35,7 @@ class tranSactionListTile extends StatelessWidget {
                   color: iconColor.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(20)),
               child: SvgPicture.asset(
-                "assets/images/shopping.svg",
+                transaction.icon,
                 color: iconColor,
               ),
             ),
@@ -54,8 +56,7 @@ class tranSactionListTile extends StatelessWidget {
                           style: TextStyle(
                               fontWeight: FontWeight.w500, fontSize: 15.sp),
                         ),
-                        Text(transaction.amount>0?"+":"-"+" ₹" +
-                          transaction.amount.abs().toString(),
+                        Text((transaction.amount > 0 ? "+" : "-") + " ₹" + "${(transaction.amount.abs()).toString()}",
                           style: TextStyle(
                               fontWeight: FontWeight.w500, fontSize: 18.sp,color: transaction.amount>0?Colors.green:Colors.red),
                         ),

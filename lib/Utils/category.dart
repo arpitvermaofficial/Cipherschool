@@ -5,17 +5,17 @@ import '../Model/categoryModel.dart';
 List<Map> categories = [
   {
     "category": "Shopping1",
-    "icon": "assets/images/bill.svg",
+    "icon": "assets/icons/bill.svg",
     "iconcolor": ColorUtils.purplelight
   },
   {
     "category": "Shopping2",
-    "icon": "assets/images/shopping.svg",
+    "icon": "assets/icons/shopping.svg",
     "iconcolor": ColorUtils.golden
   },
   {
     "category": "Shopping3",
-    "icon": "assets/images/car.svg",
+    "icon": "assets/icons/car.svg",
     "iconcolor": ColorUtils.cyan
   }
 ];

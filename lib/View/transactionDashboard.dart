@@ -11,14 +11,14 @@ import 'package:provider/provider.dart';
 import '../Model/transactionModel.dart';
 import '../database/ViewModel/dbViewModel.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class transactionDashBoard extends StatefulWidget {
+  const transactionDashBoard({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<transactionDashBoard> createState() => _transactionDashBoardState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _transactionDashBoardState extends State<transactionDashBoard> {
   Future<List<TransacationModel>>? mytranscation;
   final todoDB = TodoDB();
   Future<bool>? isLoading;
