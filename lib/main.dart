@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:cipherschool/View/splashScreen.dart';
-import 'package:cipherschool/test1.dart';
 import 'package:cipherschool/database/ViewModel/dbViewModel.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
@@ -32,7 +31,6 @@ Future<void> main() async {
       enabled: !kReleaseMode,
       builder: (context) => MultiProvider(providers: [
             ChangeNotifierProvider(create: (_) => TodoDB()),
-            ChangeNotifierProvider(create: (_) => CounterProvider()),
           ], child: MyApp())));
 }
 
