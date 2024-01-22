@@ -1,12 +1,13 @@
-
 import 'dart:ui';
-
 class CategoryModel {
-  String category="";
-  String icon="";
-  Color iconcolor=Color(0xff0077FF);
+  late String? category = "";
+  late String? icon = "";
+  late Color? iconcolor = Color(0xff0077FF);
 
-  CategoryModel({required this.category, required this.icon, required Color iconcolor});
+  CategoryModel({
+    required this.category,
+    required this.icon,
+  });
 
   CategoryModel.fromJson(Map<String, dynamic> json) {
     category = json['category'];

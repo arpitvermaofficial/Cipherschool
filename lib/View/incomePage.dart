@@ -1,9 +1,15 @@
 import 'package:cipherschool/Utils/colors.dart';
 import 'package:cipherschool/Utils/category.dart';
 import 'package:cipherschool/Model/categoryModel.dart';
+import 'package:cipherschool/View/homePage.dart';
+import 'package:cipherschool/View/homeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:flutter_svg/svg.dart';
+
+import '../Model/transactionModel.dart';
+import '../database/ViewModel/dbViewModel.dart';
+import 'package:intl/intl.dart';
 
 class IncomePage extends StatefulWidget {
   const IncomePage({super.key});
@@ -14,20 +20,49 @@ class IncomePage extends StatefulWidget {
 
 class _IncomePageState extends State<IncomePage> {
   @override
-  String _selected = "";
+  String selectedCategory = "";
   List<String> isWallet = ["Yes", "No"];
   String selectedWallet = "";
+  final todoDB = TodoDB();
+  List<String> test = [];
+  TextEditingController amountController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
 
   void initState() {
     super.initState();
   }
 
+  void _save(String Category, String icon, String iconcColor) async {
+    print("category is $Category");
+    print("icon is $icon");
+    print("iconcolor is $iconcColor");
+    String Timestamp =
+        DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()).toString();
+    await todoDB.insertNote(TransacationModel(
+        amount: int.parse(amountController.text),
+        category: Category,
+        description: descriptionController.text,
+        time: Timestamp,
+        icon: icon,
+        iconcolor: iconcColor));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: ColorUtils.cyan,
+        backgroundColor: ColorUtils.purplelight,
         appBar: AppBar(
-          backgroundColor: ColorUtils.cyan,
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+              size: 30.sp,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          backgroundColor: ColorUtils.purplelight,
           title: Text(
             "Income Page",
             style: TextStyle(
@@ -60,6 +95,7 @@ class _IncomePageState extends State<IncomePage> {
                         ),
                         Expanded(
                           child: TextField(
+                              controller: amountController,
                               keyboardType: TextInputType.number,
                               style: TextStyle(
                                 color: Colors.white,
@@ -106,17 +142,20 @@ class _IncomePageState extends State<IncomePage> {
                         isDense: true,
                         hint: new Text("Category",
                             style: TextStyle(color: Colors.grey)),
-                        value: _selected == "" ? null : _selected,
+                        value: selectedCategory == "" ? null : selectedCategory,
                         onChanged: (newValue) {
                           setState(() {
-                            _selected = newValue!;
+                            selectedCategory = newValue!;
                           });
-
-                          print(_selected);
                         },
                         items: categories.map((Map map) {
                           return DropdownMenuItem<String>(
-                            value: map["category"].toString(),
+                            value: map["category"].toString() +
+                                "#" +
+                                map["icon"].toString() +
+                                "#" +
+                                map["iconcolor"].toString() +
+                                "#",
                             // value: _mySelection,
                             child: Row(
                               children: <Widget>[
@@ -144,6 +183,7 @@ class _IncomePageState extends State<IncomePage> {
                       ),
                     ),
                     TextField(
+                      controller: descriptionController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
@@ -188,20 +228,31 @@ class _IncomePageState extends State<IncomePage> {
                     SizedBox(
                       height: 15.h,
                     ),
-                    Container(
-                      width: double.infinity,
-                      height: 7.h,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: ColorUtils.purplelight),
-                      child: Center(
-                          child: Text(
-                            'Continue',
-                            style: TextStyle(
-                                fontSize: 20.sp,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600),
-                          )),
+                    GestureDetector(
+                      onTap: () {
+                        test = selectedCategory.split('#');
+
+                        _save(test[0], test[1], test[2]);
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomePage()));
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        height: 7.h,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: ColorUtils.purplelight),
+                        child: Center(
+                            child: Text(
+                          'Continue',
+                          style: TextStyle(
+                              fontSize: 20.sp,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600),
+                        )),
+                      ),
                     ),
                   ],
                 ),

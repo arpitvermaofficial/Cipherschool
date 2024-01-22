@@ -5,8 +5,6 @@ import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_not
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../transactionList.dart';
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -28,11 +26,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   final List<Widget> bottomBarPages = [
-     HomeScreen(),
-    NoteList(),
     HomeScreen(),
-     HomeScreen(),
-   HomeScreen(),
+    Container(),
+    Container(),
+    Container(),
+    Container(),
   ];
 
   @override
@@ -113,7 +111,6 @@ class _HomePageState extends State<HomePage> {
               kIconSize: 24.0,
             )
           : null,
-
     );
   }
 }

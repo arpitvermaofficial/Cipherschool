@@ -2,17 +2,24 @@ import 'package:cipherschool/Utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:intl/intl.dart';
+
+import '../Model/transactionModel.dart';
 
 class tranSactionListTile extends StatelessWidget {
-  final Color iconcolor;
-  final String category = "Shopping";
-  final String description = "Bought a new phone";
-  final int amount = 5000;
+  final TransacationModel transaction;
 
-  const tranSactionListTile({super.key, required this.iconcolor});
+  const tranSactionListTile({super.key,  required this.transaction});
 
   @override
   Widget build(BuildContext context) {
+    String valueString = transaction.iconcolor.split('(0x')[1].split(')')[0]; //
+    int value = int.parse(valueString, radix: 16);
+    Color iconColor = new Color(value);
+    print(transaction.time);
+    print(DateFormat.jm().format(DateTime.parse(transaction.time)));
+    var time= DateFormat.jm().format(DateTime.parse(transaction.time));
     return Container(
         height: 10.h,
         child: Row(
@@ -23,11 +30,11 @@ class tranSactionListTile extends StatelessWidget {
               width: 8.h,
               padding: EdgeInsets.all(15),
               decoration: BoxDecoration(
-                  color: iconcolor.withOpacity(0.1),
+                  color: iconColor.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(20)),
               child: SvgPicture.asset(
                 "assets/images/shopping.svg",
-                color: iconcolor,
+                color: iconColor,
               ),
             ),
             SizedBox(
@@ -43,14 +50,14 @@ class tranSactionListTile extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          category,
+                          transaction.category,
                           style: TextStyle(
                               fontWeight: FontWeight.w500, fontSize: 15.sp),
                         ),
-                        Text(
-                          amount.toString() + "₹",
+                        Text(transaction.amount>0?"+":"-"+" ₹" +
+                          transaction.amount.abs().toString(),
                           style: TextStyle(
-                              fontWeight: FontWeight.w500, fontSize: 18.sp),
+                              fontWeight: FontWeight.w500, fontSize: 18.sp,color: transaction.amount>0?Colors.green:Colors.red),
                         ),
                       ],
                     ),
@@ -59,14 +66,14 @@ class tranSactionListTile extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          description,
+                          transaction.description,
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 12.sp,
                               color: Colors.grey),
                         ),
                         Text(
-                          ' 12:00 PM',
+                          time,
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 12.sp,

@@ -5,7 +5,7 @@ import 'package:flutter_svg/svg.dart';
 
 import '../Utils/colors.dart';
 
-class accountCard extends StatelessWidget {
+class accountCard extends StatefulWidget {
   final Color color;
   final int Amount;
   final String CardIcon;
@@ -13,11 +13,16 @@ class accountCard extends StatelessWidget {
   const accountCard({super.key, required this.color, required this.Amount, required this.CardIcon, required this.title});
 
   @override
+  State<accountCard> createState() => _accountCardState();
+}
+
+class _accountCardState extends State<accountCard> {
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-       if(title=="Expense") {
-          Navigator.pushNamed(context, RouteName.expansePage);
+       if(widget.title=="Expense") {
+          Navigator.pushNamed(context, RouteName.expansePage).then((_) => setState(() {}));
        }
 
         else {
@@ -26,35 +31,35 @@ class accountCard extends StatelessWidget {
       },
       child: Container(
           padding: EdgeInsets.all(10),
-          height: 8.5.h,
+          height: 8.8.h,
           width: 43.w,
           decoration: BoxDecoration(
-              color: color,
+              color: widget.color,
               borderRadius: BorderRadius.circular(20)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Container(
                 height: 5.h,
-                width: 13.w,
+                width: 12.w,
                 padding: EdgeInsets.all(5),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20)),
                 child: SvgPicture.asset(
-                  'assets/images/$CardIcon.svg',
+                  'assets/images/${widget.CardIcon}.svg',
                 ),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(title,
+                  Text(widget.title,
                       style: TextStyle(
-                          fontSize:8.sp,
+                          fontSize:13.sp,
                           fontWeight: FontWeight.w500,
                           color: Colors.white)),
-                  Text("₹$Amount",
+                  Text("₹${widget.Amount}",
                       style: TextStyle(
                           fontSize: 17.sp,
                           fontWeight: FontWeight.w700,

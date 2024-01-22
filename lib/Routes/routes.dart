@@ -1,13 +1,13 @@
 import 'package:cipherschool/Routes/routes_name.dart';
 import 'package:cipherschool/View/expansePage.dart';
 import 'package:cipherschool/View/incomePage.dart';
+import 'package:cipherschool/View/onBoardingPage.dart';
 import 'package:cipherschool/View/profilePage.dart';
 import 'package:cipherschool/View/signUp.dart';
 import 'package:cipherschool/View/splashScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../Widgets/signIN.dart';
 
 class Routes {
   static Route<dynamic> genrateRoute(RouteSettings settings) {
@@ -22,8 +22,8 @@ class Routes {
         return MaterialPageRoute(builder: (context) => ProfilePage());
       case RouteName.signUp:
         return MaterialPageRoute(builder: (context) => SignUp());
-      case RouteName.SignInScreen:
-        return MaterialPageRoute(builder: (context) => SignInScreen());
+      case RouteName.onBoarding:
+        return MaterialPageRoute(builder: (context) => onBoardingPage());
       default:
         return MaterialPageRoute(builder: (context) {
           return Scaffold(

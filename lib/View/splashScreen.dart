@@ -14,10 +14,8 @@ class Splash extends StatefulWidget {
 class _SplashState extends State<Splash> {
   @override
   void initState() {
-    Future.delayed(
-        const Duration(seconds: 3),
-            () => Navigator.pushNamed(context, RouteName.signUp)
-    );
+    Future.delayed(const Duration(seconds: 3),
+        () => Navigator.pushNamed(context, RouteName.onBoarding));
     super.initState();
   }
 
@@ -28,11 +26,11 @@ class _SplashState extends State<Splash> {
       body: SafeArea(
         child: Container(
             decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/SplashScreen.png'),
-                fit: BoxFit.cover,
-              ),
-            )),
+          image: DecorationImage(
+            image: AssetImage('assets/images/SplashScreen.png'),
+            fit: BoxFit.cover,
+          ),
+        )),
       ),
     );
   }

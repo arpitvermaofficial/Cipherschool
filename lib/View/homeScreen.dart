@@ -6,6 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sizer/flutter_sizer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
+
+import '../Model/transactionModel.dart';
+import '../database/ViewModel/dbViewModel.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,7 +19,25 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final items = List<String>.generate(20, (i) => "Item ${i + 1}");
+  Future<List<TransacationModel>>? mytranscation;
+  final todoDB = TodoDB();
+  Future<bool>? isLoading;
+
+  @override
+  void initState() {
+    isLoading = intialise();
+    super.initState();
+  }
+
+  void _delete(String date) async {
+    await todoDB.deleteNote(date);
+  }
+
+  Future<bool> intialise() async {
+    await Provider.of<TodoDB>(context, listen: false).getNoteList();
+
+    return true;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,23 +100,32 @@ class _HomeScreenState extends State<HomeScreen> {
                     fontSize: 15.sp,
                     color: Colors.grey),
               ),
-              Text(
-                "₹38000",
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 40.sp),
-              ),
+              Consumer<TodoDB>(builder: (context, todo, child) {
+                return Text(
+                  "₹" + (todo.totalIncome + todo.totalExpense).toString(),
+                  style:
+                      TextStyle(fontWeight: FontWeight.w700, fontSize: 40.sp),
+                );
+              }),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  accountCard(
-                      color: ColorUtils.greenLight,
-                      Amount: 15000,
-                      CardIcon: "incomeIcon",
-                      title: "Income"),
-                  accountCard(
-                      color: ColorUtils.redLight,
-                      Amount: 18000,
-                      CardIcon: "expenseIcon",
-                      title: "Expense")
+                  Consumer<TodoDB>(builder: (context, todo, child) {
+                    return accountCard(
+                        color: ColorUtils.greenLight,
+                        Amount: Provider.of<TodoDB>(context, listen: false)
+                            .totalIncome1,
+                        CardIcon: "incomeIcon",
+                        title: "Income");
+                  }),
+                  Consumer<TodoDB>(builder: (context, todo, child) {
+                    return accountCard(
+                        color: ColorUtils.redLight,
+                        Amount: Provider.of<TodoDB>(context, listen: true)
+                            .totalExpense1,
+                        CardIcon: "expenseIcon",
+                        title: "Expense");
+                  })
                 ],
               ),
             ]),
@@ -134,28 +165,29 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             Container(
-              height: 50.h,
-              child: ListView.builder(
-                itemCount: items.length,
-                itemBuilder: (context, index) {
-                  final item = items[index];
-                  return Dismissible(
-                    // Specify the direction to swipe and delete
-                    direction: DismissDirection.endToStart,
-                    key: Key(item),
-                    onDismissed: (direction) {
-                      // Removes that item the list on swipwe
-                      setState(() {
-                        items.removeAt(index);
-                      });
-                      // Shows the information on Snackbar
+                height: 50.h,
+                child: Consumer<TodoDB>(builder: (context, todo, child) {
+                  return ListView.builder(
+                    itemCount: todo.transaction.length,
+                    itemBuilder: (context, index) {
+                      return Dismissible(
+                        // Specify the direction to swipe and delete
+                        direction: DismissDirection.endToStart,
+                        key: UniqueKey(),
+                        onDismissed: (direction) {
+                          _delete(Provider.of<TodoDB>(context, listen: false)
+                              .transaction[index]
+                              .time);
+                        },
+                        background: Container(color: Colors.red),
+                        child: tranSactionListTile(
+                          transaction: todo.transaction[index],
+                        ),
+                      );
                     },
-                    background: Container(color: Colors.red),
-                    child: tranSactionListTile(iconcolor: ColorUtils.golden),
                   );
-                },
-              ),
-            ),
+                })
+                ),
           ],
         ),
       ),
