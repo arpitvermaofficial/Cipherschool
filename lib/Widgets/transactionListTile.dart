@@ -58,8 +58,8 @@ class tranSactionListTile extends StatelessWidget {
                         ),
                         Text((transaction.amount > 0 ? "+" : "-") + " ₹" + "${(transaction.amount.abs()).toString()}",
                           style: TextStyle(
-                              fontWeight: FontWeight.w500, fontSize: 18.sp,color: transaction.amount>0?Colors.green:Colors.red),
-                        ),
+                              fontWeight: FontWeight.w500, fontSize: 18.dp,overflow: TextOverflow.ellipsis,color: transaction.amount>0?Colors.green:Colors.red),
+                        overflow: TextOverflow.ellipsis,),
                       ],
                     ),
                     Row(
@@ -70,14 +70,14 @@ class tranSactionListTile extends StatelessWidget {
                           transaction.description,
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
-                              fontSize: 12.sp,
+                              fontSize: 12.dp ,
                               color: Colors.grey),
                         ),
                         Text(
                           time,
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
-                              fontSize: 12.sp,
+                              fontSize: 12.dp,overflow: TextOverflow.ellipsis,
                               color: Colors.grey),
                         ),
                       ],

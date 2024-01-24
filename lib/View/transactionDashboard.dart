@@ -93,7 +93,7 @@ class _transactionDashBoardState extends State<transactionDashBoard> {
                 'Account  Balance',
                 style: TextStyle(
                     fontWeight: FontWeight.w500,
-                    fontSize: 15.sp,
+                    fontSize: 15.dp,overflow: TextOverflow.ellipsis,
                     color: Colors.grey),
               ),
               Consumer<TodoDB>(builder: (context, todo, child) {
@@ -140,7 +140,7 @@ class _transactionDashBoardState extends State<transactionDashBoard> {
                 Text('Recent Transactions',
                     style: TextStyle(
                         fontWeight: FontWeight.w500,
-                        fontSize: 18.sp,
+                        fontSize: 18.dp,overflow: TextOverflow.ellipsis,
                         color: Colors.black)),
                 Container(
                   height: 5.h,
@@ -153,7 +153,7 @@ class _transactionDashBoardState extends State<transactionDashBoard> {
                       'See All',
                       style: TextStyle(
                           fontWeight: FontWeight.w500,
-                          fontSize: 12.sp,
+                          fontSize: 12.dp,overflow: TextOverflow.ellipsis,
                           color: ColorUtils.purplelight),
                     ),
                   ),

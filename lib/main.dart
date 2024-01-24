@@ -28,11 +28,15 @@ Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.transparent, // transparent status bar
   ));
-  runApp(DevicePreview(
-      enabled: !kReleaseMode,
-      builder: (context) => MultiProvider(providers: [
+  runApp(
+      // DevicePreview(
+      // enabled: !kReleaseMode,
+      // builder: (context) =>
+          MultiProvider(providers: [
             ChangeNotifierProvider(create: (_) => TodoDB()),
-          ], child: MyApp())));
+          ], child: MyApp())
+      // )
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -43,8 +47,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlutterSizer(builder: (context, orientation, screenType) {
       return MaterialApp(
-        locale: DevicePreview.locale(context),
-        builder: DevicePreview.appBuilder,
+        // locale: DevicePreview.locale(context),
+        // builder: DevicePreview.appBuilder,
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(

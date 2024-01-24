@@ -39,13 +39,12 @@ class _ExpansePageState extends State<ExpansePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: ColorUtils.cyan,
-        resizeToAvoidBottomInset: true,
         appBar: AppBar(
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
               color: Colors.white,
-              size: 30.sp,
+              size: 30.dp,
             ),
             onPressed: () {
               Navigator.pop(context);
@@ -59,51 +58,59 @@ class _ExpansePageState extends State<ExpansePage> {
             ),
           ),
         ),
-        body: Column(
-          children: [
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              height: 30.h,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "How much?",
-                    style: TextStyle(fontSize: 17.sp, color: Colors.white54),
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        "₹ ",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 50.sp,
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                height: 30.h,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "How much?",
+                      style: TextStyle(
+                          fontSize: 17.dp,
+                          overflow: TextOverflow.ellipsis,
+                          color: Colors.white54),
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "₹ ",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 50.dp,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
-                      ),
-                      Expanded(
-                        child: TextField(
-                            controller: amountController,
-                            keyboardType: TextInputType.number,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 50.sp,
-                            ),
-                            decoration: InputDecoration(
-                              hintText: "0",
-                              hintStyle: TextStyle(
+                        Expanded(
+                          child: TextField(
+
+                              controller: amountController,
+                              keyboardType: TextInputType.number,
+                              style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 50.sp,
+                                fontSize: 50.dp,
+                                overflow: TextOverflow.ellipsis,
                               ),
-                            )),
-                      ),
-                    ],
-                  )
-                ],
+                              decoration: InputDecoration(
+                                hintText: "0",
+                                hintStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 50.dp,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              )),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
-            ),
-            Expanded(
-              child: Container(
+              Container(
+                height: 60.h,
                 width: double.infinity,
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 decoration: BoxDecoration(
@@ -117,8 +124,8 @@ class _ExpansePageState extends State<ExpansePage> {
                   children: [
                     Container(
                       width: double.infinity,
-                      height: 8.h,
-                      padding: EdgeInsets.all(15),
+                      height: 7.h,
+                      padding: EdgeInsets.symmetric(horizontal: 10),
                       decoration: BoxDecoration(
                           border: Border.all(width: 1, color: Colors.grey),
                           borderRadius: BorderRadius.circular(15)),
@@ -126,8 +133,8 @@ class _ExpansePageState extends State<ExpansePage> {
                         isExpanded: true,
                         icon: Icon(Icons.keyboard_arrow_down),
                         underline: Container(),
-                        iconSize: 45,
-                        isDense: true,
+                        iconSize: 40.dp,
+                        isDense: false,
                         hint: new Text("Category",
                             style: TextStyle(color: Colors.grey)),
                         value: selectedCategory == "" ? null : selectedCategory,
@@ -145,26 +152,31 @@ class _ExpansePageState extends State<ExpansePage> {
                                 map["iconcolor"].toString() +
                                 "#",
                             // value: _mySelection,
-                            child: Row(
-                              children: <Widget>[
-                                Container(
-                                  height: 6.h,
-                                  padding: EdgeInsets.all(10),
-                                  width: 13.w,
-                                  decoration: BoxDecoration(
-                                      color: map["iconcolor"].withOpacity(0.1),
-                                      borderRadius: BorderRadius.circular(20)),
-                                  child: SvgPicture.asset(map["icon"],
-                                      color: map["iconcolor"]),
-                                ),
-                                SizedBox(
-                                  width: 5.w,
-                                ),
-                                Text(
-                                  map["category"],
-                                  style: TextStyle(fontSize: 18.sp),
-                                ),
-                              ],
+                            child: Container(
+                              padding: EdgeInsets.all(5),
+                              child: Row(
+                                children: <Widget>[
+                                  Container(
+                                    height: 25.h,
+                                    padding: EdgeInsets.all(10),
+                                    width: 13.w,
+                                    decoration: BoxDecoration(
+                                        color:
+                                            map["iconcolor"].withOpacity(0.1),
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
+                                    child: SvgPicture.asset(map["icon"],
+                                        color: map["iconcolor"]),
+                                  ),
+                                  SizedBox(
+                                    width: 5.w,
+                                  ),
+                                  Text(
+                                    map["category"],
+                                    style: TextStyle(fontSize: 18.sp),
+                                  ),
+                                ],
+                              ),
                             ),
                           );
                         }).toList(),
@@ -173,8 +185,11 @@ class _ExpansePageState extends State<ExpansePage> {
                     TextField(
                       controller: descriptionController,
                       decoration: InputDecoration(
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(color: Colors.grey),
                         ),
                         hintText: "Description",
                         hintStyle: TextStyle(
@@ -184,8 +199,8 @@ class _ExpansePageState extends State<ExpansePage> {
                     ),
                     Container(
                       width: double.infinity,
-                      height: 8.h,
-                      padding: EdgeInsets.all(15),
+                      height: 7.h,
+                      padding: EdgeInsets.symmetric(horizontal: 10),
                       decoration: BoxDecoration(
                           border: Border.all(width: 1, color: Colors.grey),
                           borderRadius: BorderRadius.circular(15)),
@@ -193,7 +208,7 @@ class _ExpansePageState extends State<ExpansePage> {
                         isExpanded: true,
                         icon: Icon(Icons.keyboard_arrow_down),
                         underline: Container(),
-                        iconSize: 45,
+                        iconSize: 40.dp,
                         isDense: true,
                         hint: new Text(
                           "Wallet",
@@ -219,18 +234,32 @@ class _ExpansePageState extends State<ExpansePage> {
                     Consumer<TodoDB>(builder: (context, todo, child) {
                       return GestureDetector(
                         onTap: () {
-                          test = selectedCategory.split('#');
-                          String Timestamp = DateFormat('yyyy-MM-dd HH:mm:ss')
-                              .format(DateTime.now())
-                              .toString();
-                          todo.insertNote(TransacationModel(
-                              amount: int.parse(amountController.text) * -1,
-                              category: test[0],
-                              description: descriptionController.text,
-                              time: Timestamp,
-                              icon: test[1],
-                              iconcolor: test[2]));
-                          Navigator.pop(context);
+                          if (descriptionController == null ||
+                              amountController.text.isEmpty ||
+                              amountController.text == "") {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text('Please enter all fields'),
+                              duration: Duration(seconds: 1),
+                            ));
+                          } else if (amountController.text.length > 10) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text('Please enter valid amount'),
+                              duration: Duration(seconds: 1),
+                            ));
+                          } else {
+                            test = selectedCategory.split('#');
+                            String Timestamp = DateFormat('yyyy-MM-dd HH:mm:ss')
+                                .format(DateTime.now())
+                                .toString();
+                            todo.insertNote(TransacationModel(
+                                amount: int.parse(amountController.text) * -1,
+                                category: test[0],
+                                description: descriptionController.text,
+                                time: Timestamp,
+                                icon: test[1],
+                                iconcolor: test[2]));
+                            Navigator.pop(context);
+                          }
                         },
                         child: Container(
                           width: double.infinity,
@@ -242,7 +271,8 @@ class _ExpansePageState extends State<ExpansePage> {
                               child: Text(
                             'Continue',
                             style: TextStyle(
-                                fontSize: 20.sp,
+                                fontSize: 20.dp,
+                                overflow: TextOverflow.ellipsis,
                                 color: Colors.white,
                                 fontWeight: FontWeight.w600),
                           )),
@@ -251,9 +281,9 @@ class _ExpansePageState extends State<ExpansePage> {
                     }),
                   ],
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ));
   }
 }
