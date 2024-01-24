@@ -18,6 +18,7 @@ class _SignUpState extends State<SignUp> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool value = false;
+
   void dispose() {
     nameController.dispose();
     emailController.dispose();
@@ -44,20 +45,24 @@ class _SignUpState extends State<SignUp> {
                 children: [
                   textField(hintText: 'Name', controller: nameController),
                   SizedBox(
-                    height: 2.h,),
+                    height: 3.h,
+                  ),
                   textField(hintText: 'Email', controller: emailController),
                   SizedBox(
-                    height: 2.h,),
-                  textField(hintText: 'Password', controller: passwordController),
+                    height: 3.h,
+                  ),
+                  textField(
+                      hintText: 'Password', controller: passwordController),
                   SizedBox(
-                    height: 2.h,),
+                    height: 2.h,
+                  ),
                   Row(
                     children: [
                       Transform.scale(
                         scale: 1.3,
                         child: Checkbox(
-                          side:
-                              BorderSide(color: ColorUtils.purplelight, width: 2),
+                          side: BorderSide(
+                              color: ColorUtils.purplelight, width: 2),
                           value: this.value,
                           onChanged: (bool? value) {
                             setState(() {
@@ -77,7 +82,8 @@ class _SignUpState extends State<SignUp> {
                                 text: 'Terms of Service and Privacy Policy',
                                 style: TextStyle(
                                   color: ColorUtils.purplelight,
-                                  fontSize: 15.dp,overflow: TextOverflow.ellipsis,
+                                  fontSize: 15.dp,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               )
                             ])),
@@ -85,7 +91,8 @@ class _SignUpState extends State<SignUp> {
                     ],
                   ),
                   SizedBox(
-                    height: 2.h,),
+                    height: 2.h,
+                  ),
                   Container(
                     width: double.infinity,
                     height: 7.h,
@@ -96,22 +103,26 @@ class _SignUpState extends State<SignUp> {
                         child: Text(
                       'Sign Up',
                       style: TextStyle(
-                          fontSize: 20.dp,overflow: TextOverflow.ellipsis,
+                          fontSize: 20.dp,
+                          overflow: TextOverflow.ellipsis,
                           color: Colors.white,
                           fontWeight: FontWeight.w600),
                     )),
                   ),
                   SizedBox(
-                    height: 2.h,),
+                    height: 2.h,
+                  ),
                   Text(
                     'Or with',
                     style: TextStyle(
-                      fontSize: 15.dp,overflow: TextOverflow.ellipsis,
+                      fontSize: 15.dp,
+                      overflow: TextOverflow.ellipsis,
                       color: Colors.grey,
                     ),
                   ),
                   SizedBox(
-                    height: 2.h,),
+                    height: 2.h,
+                  ),
                   FutureBuilder(
                     future: Authentication.initializeFirebase(context: context),
                     builder: (context, snapshot) {
@@ -136,7 +147,8 @@ class _SignUpState extends State<SignUp> {
                         TextSpan(
                           text: 'Login',
                           style: TextStyle(
-                              fontSize: 15.dp,overflow: TextOverflow.ellipsis,
+                              fontSize: 15.dp,
+                              overflow: TextOverflow.ellipsis,
                               color: ColorUtils.purplelight,
                               decoration: TextDecoration.underline),
                         )

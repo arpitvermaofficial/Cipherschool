@@ -15,6 +15,8 @@ class textField extends StatelessWidget {
         //   FocusManager.instance.primaryFocus?.unfocus();
         // },
         decoration: InputDecoration(
+          contentPadding:
+          EdgeInsets.symmetric(horizontal: 10, vertical: 15),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.grey),
             borderRadius: BorderRadius.circular(
